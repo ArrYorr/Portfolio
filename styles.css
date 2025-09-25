@@ -329,3 +329,23 @@ footer {
   .social-icons a { font-size: 1.5rem; }
   section[id] { scroll-margin-top: 100px; }
 }
+
+/* --- DISABLE ANIMATIONS ON MOBILE --- */
+@media (max-width: 768px) {
+  #hero {
+    animation: none !important;
+  }
+
+  #hero h2 {
+    animation: none !important;
+    border-right: none !important;
+    white-space: normal !important;
+    width: auto !important;
+  }
+
+  section {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
