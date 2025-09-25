@@ -1,5 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
 
+/* --- THEME VARIABLES --- */
+:root {
+  --bg-color: #111;
+  --text-color: #f0f0f0;
+  --primary-color: #ffa500;
+  --card-bg-color: #1e1e1e;
+  --header-bg-color: #000;
+  --border-color: #333;
+  --hero-bg-color: #1a1a1a;
+  --hero-overlay-color: rgba(17, 17, 17, 0.7);
+}
+
+body.light-mode {
+  --bg-color: #f4f4f4;
+  --text-color: #111;
+  --primary-color: #d98c00;
+  --card-bg-color: #ffffff;
+  --header-bg-color: #ffffff;
+  --border-color: #ddd;
+  --hero-bg-color: #e9e9e9;
+  --hero-overlay-color: rgba(233, 233, 233, 0.3);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -12,10 +35,10 @@ html {
 
 body {
   font-family: 'JetBrains Mono', monospace;
-  background-color: #111;
-  color: #f0f0f0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   line-height: 1.6;
-  transition: background 0.4s ease, color 0.4s ease;
+  transition: background-color 0.4s ease, color 0.4s ease;
   overflow-x: hidden;
 }
 
@@ -25,13 +48,14 @@ a {
 }
 
 header {
-  background: #000;
+  background: var(--header-bg-color);
   padding: 20px 40px;
-  box-shadow: 0 2px 4px rgba(255, 165, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
   animation: slideDown 0.6s ease-in-out;
+  transition: background-color 0.4s ease;
 }
 
 nav {
@@ -42,65 +66,119 @@ nav {
 
 nav h1 {
   font-size: 1.8rem;
-  color: #ffa500;
+  color: var(--primary-color);
 }
 
-nav ul {
+.nav-items {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Space between links and toggle */
+}
+
+.nav-items ul {
   list-style: none;
   display: flex;
   gap: 20px;
 }
 
-nav a {
-  color: #f0f0f0;
+.nav-items a {
+  color: var(--text-color);
   position: relative;
   font-weight: 500;
   transition: color 0.3s;
 }
 
-nav a::after {
+.nav-items a::after {
   content: '';
   height: 2px;
   width: 0;
-  background: #ffa500;
+  background: var(--primary-color);
   position: absolute;
   left: 0;
   bottom: -4px;
   transition: width 0.3s;
 }
 
-nav a:hover {
-  color: #ffa500;
+.nav-items a:hover {
+  color: var(--primary-color);
   animation: bounce 0.4s;
 }
 
-nav a:hover::after {
+.nav-items a:hover::after {
   width: 100%;
 }
 
-#hero {
-  padding: 100px 40px 60px;
-  background: #1a1a1a;
-  text-align: center;
-  animation: fadeInUp 1s ease forwards;
+/* --- THEME ICON TOGGLE --- */
+.theme-toggle {
+  cursor: pointer;
+  font-size: 1.5rem;
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+.theme-icon {
+  position: absolute;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
+/* By default (dark mode), hide the sun icon */
+#sun-icon {
+  opacity: 0;
+  transform: scale(0);
+}
+
+/* When in light mode, show the sun and hide the moon */
+body.light-mode #sun-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+body.light-mode #moon-icon {
+  opacity: 0;
+  transform: scale(0);
+}
+
+
+/* --- HERO SECTION WITH PARALLAX --- */
+#hero {
+  padding: 100px 40px 60px;
+  text-align: center;
+  animation: fadeInUp 1s ease forwards;
+  position: relative;
+  background-color: var(--hero-bg-color);
+  /* background-image: url('your-image.jpg'); */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: background-color 0.4s ease;
+}
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--hero-overlay-color);
+    transition: background 0.4s ease;
+}
+#hero h2, #hero p {
+    position: relative;
+    z-index: 2;
+}
 #hero h2 {
   font-size: 1.5rem;
   max-width: 90vw;
   margin: 0 auto 20px;
-  color: #ffa500;
+  color: var(--primary-color);
   overflow: hidden;
   white-space: nowrap;
-  border-right: 2px solid #ffa500;
+  border-right: 2px solid var(--primary-color);
   width: 0;
-  animation: typing 3s steps(40, end) forwards, blink 0.75s step-end infinite;
+  animation: typing 3s steps(68, end) forwards, blink 0.75s step-end infinite;
 }
-
 #hero p {
   font-size: 1.2rem;
   color: #ccc;
 }
+body.light-mode #hero p { color: #333; }
 
 section {
   padding: 60px 40px;
@@ -108,70 +186,60 @@ section {
   transform: translateY(60px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
-
-section[id] {
-  scroll-margin-top: 100px;
-}
-
-
+section[id] { scroll-margin-top: 100px; }
 section.visible {
   opacity: 1;
   transform: translateY(0);
 }
-
-#about p,
-#contact p {
+#about p, #contact p {
   color: #ccc;
 }
+body.light-mode #about p, body.light-mode #contact p { color: #555; }
 
 #projects .project {
   margin-bottom: 40px;
   padding: 20px;
-  background: #1e1e1e;
-  border-left: 4px solid #ffa500;
-  box-shadow: 0 2px 10px rgba(255, 165, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: var(--card-bg-color);
+  border-left: 4px solid var(--primary-color);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease;
 }
-
 .project h3 {
-  color: #ffa500;
+  color: var(--primary-color);
   margin-bottom: 10px;
 }
-
-.project p {
-  color: #ddd;
-}
-
+.project p { color: #ddd; }
+body.light-mode .project p { color: #333; }
 .project:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 20px rgba(255, 165, 0, 0.3);
 }
-
 .project-link {
-  color: #ffa500; 
+  color: var(--primary-color);
   font-weight: bold;
-  text-decoration: none; 
+  text-decoration: none;
 }
-
-.project-link:hover {
-  text-decoration: underline; 
-}
+.project-link:hover { text-decoration: underline; }
 
 .social-icons {
   margin-top: 25px;
   display: flex;
   gap: 25px;
+  justify-content: center;
 }
-
 .social-icons a {
-  color: #f0f0f0;
-  font-size: 1.8rem; /* Controls the icon size */
+  color: var(--text-color);
+  font-size: 1.8rem;
   transition: transform 0.3s ease, color 0.3s ease;
 }
-
 .social-icons a:hover {
-  color: #ffa500; 
-  transform: translateY(-5px); 
+  color: var(--primary-color);
+  transform: translateY(-5px);
+}
+
+#stack h2, #projects h2, section h2 {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 #stack ul {
@@ -182,129 +250,86 @@ section.visible {
   justify-content: center;
   margin-top: 20px;
 }
-
 #stack li {
-  background: #1e1e1e;
-  color: #f0f0f0;
+  background: var(--card-bg-color);
+  color: var(--text-color);
   padding: 10px 20px;
   border-radius: 5px;
-  border: 1px solid #333;
+  border: 1px solid var(--border-color);
   font-weight: 500;
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.4s ease;
   display: flex;
   align-items: center;
-  gap: 10px; /* Adds space between the icon and text */
+  gap: 10px;
 }
-
-#stack li i {
-  font-size: 1.5rem; /* Controls the size of the tech icons */
-}
-
+#stack li i { font-size: 1.5rem; }
 #stack li:hover {
   transform: translateY(-5px);
-  border-color: #ffa500;
+  border-color: var(--primary-color);
 }
-}
-
-#stack li:hover {
-  transform: translateY(-5px);
-  border-color: #ffa500;
+#stack li:hover i {
+  animation: icon-bounce 0.5s;
 }
 
 footer {
   text-align: center;
   padding: 20px;
-  background: #000;
+  background: var(--header-bg-color);
   color: #888;
   font-size: 0.9rem;
+  transition: background-color 0.4s ease;
 }
 
 @keyframes slideDown {
-  from {
-    transform: translateY(-60px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  from { transform: translateY(-60px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
-
 @keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  to { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes typing {
   from { width: 0; }
   to { width: 100%; }
 }
-
 @keyframes blink {
   50% { border-color: transparent; }
 }
-
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-4px); }
 }
+@keyframes icon-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
 
 /* --- MOBILE RESPONSIVE STYLES --- */
 @media (max-width: 768px) {
-
-  /* 1. Reduce padding for sections */
-  section {
-    padding: 60px 20px;
-  }
-
-  /* 2. Adjust navigation for smaller screens */
-  header {
-    padding: 15px 20px; /* REDUCED the header padding */
-  }
-  
+  header { padding: 15px 20px; }
   nav {
     flex-direction: column; 
-    gap: 15px; /* INCREASED gap for better spacing */
+    gap: 15px;
   }
+  .nav-items {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  nav h1 { font-size: 1.5rem; }
+  nav ul { gap: 20px; }
   
-  nav h1 {
-    font-size: 1.5rem; 
-  }
-  
-  nav ul {
-    gap: 20px; /* INCREASED gap for easier tapping */
-  }
-
-  /* 3. Adjust font sizes */
   #hero h2 {
-    font-size: 1.2rem; 
-    width: auto;
-    border-right: none;
-    white-space: normal; 
-    animation: none; 
+    font-size: 1.2rem;
+    white-space: normal; /* Allows text to wrap */
+    width: auto; /* Lets the text take up natural width */
+    border-right: none; /* Removes the cursor */
+    animation: none; /* Disables the typing animation */
   }
 
-  #hero p {
-    font-size: 1rem;
-  }
-
-  .project h3 {
-    font-size: 1.1rem;
-  }
-
-  p {
-    font-size: 0.95rem;
-  }
-
-  /* 4. Adjust icon sizes for mobile */
-  .social-icons a {
-    font-size: 1.5rem; /* REDUCED the icon font size */
-  }
-
-  /* Adjust scroll margin for the new mobile nav height */
-  section[id] {
-    scroll-margin-top: 100px; /* ADJUSTED scroll offset */
-  }
+  #hero p { font-size: 1rem; }
+  .project h3 { font-size: 1.1rem; }
+  p { font-size: 0.95rem; }
+  .social-icons a { font-size: 1.5rem; }
+  section[id] { scroll-margin-top: 100px; }
 }
