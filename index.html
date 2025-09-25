@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayo Portfolio</title>
+    <link rel="stylesheet"
+    href="styles.css"/>
+</head>
+<body>
+<header>
+    <nav>
+        <h1>ArrYorr</h1>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#stack">Tech Stack</a></li>
+            <li><a href="#contact">Contact</a></li>
+            
+        </ul>
+    </nav>
+</header>
+<section id="hero">
+    <h2>Hi, I am an Engineering grad who builds smart tech for agriculture</h2>
+    <p>Turning Ideas Into Interactive Experiences</p>
+</section>
+
+<section id="about">
+<h2>About Me</h2>
+<p>Hi, I'm Ayo. I'm an engineering graduate with a degree in Agriculture and Bioresource Engineering, but my real passion is building things for the web. My coding journey kicked off after building a simple WordPress site and becoming obsessed with understanding the code behind it.
+<br>
+After a deep dive into front-end development, I found my mission: combining my engineering background with my new skills to help bring Nigeria's agriculture sector into the digital age. I love the challenge of creating clean, intuitive interfaces that solve real-world problems.
+<br>
+Outside of tech, my time is split between cars and gaming. My approach to just about everything, from a new project to a new game, is to jump in and learn as I go. It's how I stay curious and constantly get better.
+</p>
+</section>
+
+<section id="projects">
+    <h2>My Projects</h2>
+    <div class="project">
+    <h3>FeedRoute</h3>
+    <p>FeedRoute is a comprehensive web application designed as a two-sided marketplace to connect local farmers directly with customers. The platform empowers farmers with tools to upload their produce, manage inventory, and handle orders. On the other side, customers can easily browse, search, and filter for fresh products, view detailed information, and complete purchases through an integrated cart and checkout system. The app features distinct, tailored dashboards for both farmers and customers to create a specialized experience for each role. You can check out the project <a href="https://digi-hack-feed-route.vercel.app/" class="project-link" target="_blank">Here</a>
+        <br>
+        <br>Technologies used: React and Vite, styled with Tailwind CSS, and uses React Router for multi-page navigation.
+    </p>
+</div>
+<div class="project">
+    <h3>
+        AgroAI Dasboard
+    </h3>
+    <p>
+        A web app that predicts crop yeild using machine learning and visualizes farm data
+    </p>
+</div>
+</section>
+<section id="stack">
+    <h2>Tech Stack</h2>
+    <ul>
+        <li>HTML5</li>
+        <li>CSS3 (Tailwind CSS)</li>
+        <li>JavaScript (ES6+)</li>
+        <li>React</li>
+        <li>Vite</li>
+        <li>Git & GitHub</li>
+    </ul>
+</section>
+<section id="contact">
+    <h2>Contact Me</h2>
+    <p>
+        Got a Project? Or just want to say hi? let's chat.
+    </p>
+    <a href="mailto:alabiayo22@gmail.com">alabiayo22@gmail.com</a>
+</section>
+<footer>
+    <p>&copy; 2025 Ayo. All rights reserved</p>
+</footer>
+<script>
+    const sections =
+    document.querySelectorAll("section");
+
+    const observer = new
+    IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                }
+            });
+        },
+        {
+            threshold: 0.1
+        }
+    );
+
+    sections.forEach(
+        section => {
+            observer.observe(section);
+        }
+
+    );
+</script>
+</body>
+</html>
