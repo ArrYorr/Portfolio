@@ -109,9 +109,8 @@ section {
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-/* FIX FOR SCROLL POSITIONING */
 section[id] {
-  scroll-margin-top: 100px; /* Adjust this value based on your nav height */
+  scroll-margin-top: 100px;
 }
 
 
@@ -158,24 +157,23 @@ section.visible {
   text-decoration: underline; 
 }
 
-
-#contact a {
-  display: inline-block;
-  background: #ffa500;
-  color: #111;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-weight: bold;
-  margin-top: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.social-icons {
+  margin-top: 25px;
+  display: flex;
+  gap: 25px;
 }
 
-#contact a:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px #ffa500a0;
+.social-icons a {
+  color: #f0f0f0;
+  font-size: 1.8rem; /* Controls the icon size */
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
-/* NEW STYLES FOR TECH STACK SECTION */
+.social-icons a:hover {
+  color: #ffa500; 
+  transform: translateY(-5px); 
+}
+
 #stack ul {
   list-style: none;
   display: flex;
@@ -241,38 +239,38 @@ footer {
 }
 
 /* --- MOBILE RESPONSIVE STYLES --- */
-/* This media query will apply these styles only on screens 768px wide or smaller */
 @media (max-width: 768px) {
 
-  /* 1. Reduce padding to give more space for content */
-  header,
+  /* 1. Reduce padding for sections */
   section {
     padding: 60px 20px;
   }
 
   /* 2. Adjust navigation for smaller screens */
+  header {
+    padding: 15px 20px; /* REDUCED the header padding */
+  }
+  
   nav {
-    flex-direction: column; /* Stack the logo and links vertically */
-    gap: 10px;
-    padding: 15px;
+    flex-direction: column; 
+    gap: 15px; /* INCREASED gap for better spacing */
   }
   
   nav h1 {
-    font-size: 1.5rem; /* Make the logo slightly smaller */
+    font-size: 1.5rem; 
   }
   
   nav ul {
-    gap: 15px; /* Reduce the gap between nav links */
+    gap: 20px; /* INCREASED gap for easier tapping */
   }
 
-  /* 3. Make font sizes smaller and more readable on mobile */
+  /* 3. Adjust font sizes */
   #hero h2 {
-    font-size: 1.2rem; /* Adjust hero title font size */
-    /* We reset the typing animation to ensure it fits */
+    font-size: 1.2rem; 
     width: auto;
     border-right: none;
-    white-space: normal; /* Allow text to wrap */
-    animation: none; /* Disable the typing animation on mobile */
+    white-space: normal; 
+    animation: none; 
   }
 
   #hero p {
@@ -284,11 +282,16 @@ footer {
   }
 
   p {
-    font-size: 0.95rem; /* Slightly reduce the default paragraph font size */
+    font-size: 0.95rem;
   }
 
-  /* Adjust scroll margin for the smaller mobile nav */
+  /* 4. Adjust icon sizes for mobile */
+  .social-icons a {
+    font-size: 1.5rem; /* REDUCED the icon font size */
+  }
+
+  /* Adjust scroll margin for the new mobile nav height */
   section[id] {
-    scroll-margin-top: 120px;
+    scroll-margin-top: 100px; /* ADJUSTED scroll offset */
   }
 }
