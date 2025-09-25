@@ -40,6 +40,7 @@ body {
   line-height: 1.6;
   transition: background-color 0.4s ease, color 0.4s ease;
   overflow-x: hidden;
+  text-align: left;
 }
 
 a {
@@ -54,7 +55,6 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  animation: slideDown 0.6s ease-in-out;
   transition: background-color 0.4s ease;
 }
 
@@ -62,6 +62,13 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap; /* Allow items to wrap on mobile */
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 nav h1 {
@@ -72,7 +79,7 @@ nav h1 {
 .nav-items {
   display: flex;
   align-items: center;
-  gap: 30px; /* Space between links and toggle */
+  gap: 30px;
 }
 
 .nav-items ul {
@@ -101,7 +108,6 @@ nav h1 {
 
 .nav-items a:hover {
   color: var(--primary-color);
-  animation: bounce 0.4s;
 }
 
 .nav-items a:hover::after {
@@ -115,19 +121,16 @@ nav h1 {
   position: relative;
   width: 24px;
   height: 24px;
+  color: var(--text-color);
 }
 .theme-icon {
   position: absolute;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
-
-/* By default (dark mode), hide the sun icon */
 #sun-icon {
   opacity: 0;
   transform: scale(0);
 }
-
-/* When in light mode, show the sun and hide the moon */
 body.light-mode #sun-icon {
   opacity: 1;
   transform: scale(1);
@@ -136,8 +139,6 @@ body.light-mode #moon-icon {
   opacity: 0;
   transform: scale(0);
 }
-
-
 /* --- HERO SECTION WITH PARALLAX --- */
 #hero {
   padding: 100px 40px 60px;
@@ -193,6 +194,7 @@ section.visible {
 }
 #about p, #contact p {
   color: #ccc;
+  text-align: left;
 }
 body.light-mode #about p, body.light-mode #contact p { color: #555; }
 
@@ -238,7 +240,6 @@ body.light-mode .project p { color: #333; }
 }
 
 #stack h2, #projects h2, section h2 {
-    text-align: center;
     margin-bottom: 20px;
 }
 
@@ -318,15 +319,10 @@ footer {
   }
   nav h1 { font-size: 1.5rem; }
   nav ul { gap: 20px; }
-  
   #hero h2 {
     font-size: 1.2rem;
-    white-space: normal; /* Allows text to wrap */
-    width: auto; /* Lets the text take up natural width */
-    border-right: none; /* Removes the cursor */
-    animation: none; /* Disables the typing animation */
+    white-space: normal;
   }
-
   #hero p { font-size: 1rem; }
   .project h3 { font-size: 1.1rem; }
   p { font-size: 0.95rem; }
